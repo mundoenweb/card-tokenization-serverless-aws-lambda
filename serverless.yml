@@ -1,4 +1,4 @@
-service: aws-lambda-nodejs
+service: card-tokenization-serverless
 frameworkVersion: '3'
 
 plugins:
