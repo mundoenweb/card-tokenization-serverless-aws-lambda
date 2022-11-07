@@ -1,92 +1,44 @@
-<!--
-title: 'AWS Simple HTTP Endpoint example in NodeJS'
-description: 'This template demonstrates how to make a simple HTTP API with Node.js running on AWS Lambda and API Gateway using the Serverless Framework.'
-layout: Doc
-framework: v3
-platform: AWS
-language: nodeJS
-authorLink: 'https://github.com/serverless'
-authorName: 'Serverless, inc.'
-authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
--->
+# tokenizacion tarjeta de credito y debito
 
-# Serverless Framework Node HTTP API on AWS
+- Ejecutar el comando ( npm run install )
 
-This template demonstrates how to make a simple HTTP API with Node.js running on AWS Lambda and API Gateway using the Serverless Framework.
+## Comandos de compilacion y Test 
+- utilice el comando ( npm run tsc ) para compilar en la carpeta build 
+- utilice el comando ( npm run test ) praa ejecutar testing
 
-This template does not include any kind of persistence (database). For more advanced examples, check out the [serverless/examples repository](https://github.com/serverless/examples/) which includes Typescript, Mongo, DynamoDB and other examples.
+## serverless deploy aws Lambda
 
-## Usage
+- consigure un usuario en aws para subir proyectos a Lambda
+- descargar e instalar la cli de aws (https://aws.amazon.com/es/cli/)
+- configurar sus credenciales de usuario en la cli
+- ejecutar el comando ( sls deploy ) para subir a Lamda, al terminar la ejecucion, se le informara por la consola de comandos la url de la api
 
-### Deployment
+## api actual corriendo en un servidor aws Lambda
 
-```
-$ serverless deploy
-```
+- GET - https://epq185d6fg.execute-api.us-east-1.amazonaws.com/
+- POST - https://epq185d6fg.execute-api.us-east-1.amazonaws.com/
 
-After deploying, you should see output similar to:
-
-```bash
-Deploying aws-node-http-api-project to stage dev (us-east-1)
-
-✔ Service deployed to stack aws-node-http-api-project-dev (152s)
-
-endpoint: GET - https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/
-functions:
-  hello: aws-node-http-api-project-dev-hello (1.9 kB)
-```
-
-_Note_: In current form, after deployment, your API is public and can be invoked by anyone. For production deployments, you might want to configure an authorizer. For details on how to do that, refer to [http event docs](https://www.serverless.com/framework/docs/providers/aws/events/apigateway/).
-
-### Invocation
-
-After successful deployment, you can call the created application via HTTP:
-
-```bash
-curl https://xxxxxxx.execute-api.us-east-1.amazonaws.com/
-```
-
-Which should result in response similar to the following (removed `input` content for brevity):
-
+### EndPoints
+- /  (POST): debe pasar los datos de la tarjeta e email
 ```json
 {
-  "message": "Go Serverless v2.0! Your function executed successfully!",
-  "input": {
-    ...
-  }
+    "email": "rommer@hotmail.com",
+    "cvv": "123",
+    "expiration_month": "12",
+    "expiration_year": "2027",
+    "card_number": "4551038338995199"
 }
 ```
-
-### Local development
-
-You can invoke your function locally by using the following command:
-
-```bash
-serverless invoke local --function hello
-```
-
-Which should result in response similar to the following:
-
-```
+- /  (GET): debe pasar el token en la cabezera
+```json
 {
-  "statusCode": 200,
-  "body": "{\n  \"message\": \"Go Serverless v3.0! Your function executed successfully!\",\n  \"input\": \"\"\n}"
+    "authorization": "Bearer ClDTOYVIfhdz9mOK",
 }
 ```
 
+## Patron de diseño y arquitectura utilizados
 
-Alternatively, it is also possible to emulate API Gateway and Lambda locally by using `serverless-offline` plugin. In order to do that, execute the following command:
+- diseño: ninguno
+- arquitectura: REST; Se escogio la arquitectura REST por su fiabilidad, escalabilidad, flexibilidad al momento de desarrollar la aplicacion
 
-```bash
-serverless plugin install -n serverless-offline
-```
 
-It will add the `serverless-offline` plugin to `devDependencies` in `package.json` file as well as will add it to `plugins` in `serverless.yml`.
-
-After installation, you can start local emulation with:
-
-```
-serverless offline
-```
-
-To learn more about the capabilities of `serverless-offline`, please refer to its [GitHub repository](https://github.com/dherault/serverless-offline).
