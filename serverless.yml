@@ -1,0 +1,23 @@
+service: aws-lambda-nodejs
+frameworkVersion: '3'
+
+plugins:
+  - serverless-ignore
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+
+functions:
+  getCard:
+    handler: build/componentes/cards/getCardController.getCardController
+    events:
+      - httpApi:
+          path: /
+          method: get
+  createToken:
+    handler: build/componentes/cards/createTokenController.createTokenController
+    events:
+      - httpApi:
+          path: /
+          method: post

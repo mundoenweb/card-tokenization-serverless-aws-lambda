@@ -1,0 +1,11 @@
+	
+# for sls
+README.md
+.src/*
+.src
+src/
+src
+.git/*
+# ignore aws-sdk
+node_modules/aws-sdk/*
+# .env.example
