@@ -1,8 +1,7 @@
 # tokenizacion tarjeta de credito y debito
 
-- Ejecutar el comando ( npm run install )
-
 ## Comandos de compilacion y Test 
+- Ejecutar el comando ( npm run install )
 - utilice el comando ( npm run tsc ) para compilar en la carpeta build 
 - utilice el comando ( npm run test ) praa ejecutar testing
 
